@@ -1,0 +1,45 @@
+<div class="login" fxLayout="row" fxFlexAlign="center center">
+  <mat-card class="login-card p-0 pb-16">
+    <mat-card-header class="primary-bg m-0 p-8" fxLayout="row" fxFlexAlign="start center">
+      <div mat-card-avatar class="header-image ml-16">
+        <img src="../assets/img/user_icon.png" />
+      </div>
+      <mat-card-title class="white-fg mt-8">Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="m-32">
+      <form class="my-form" fxLayout="column">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" name="email" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password" name="password" type="password" />
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="m-16 ml-32 mr-32" fxLayout="row" fxLayoutGap="10px">
+      <button mat-raised-button (click)="login()" color="primary" class="white-fg">Login</button>
+      <button mat-button (click)="signUp()" color="warn"><i>Sign Up</i></button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<!--
+  <div class="login">
+
+   <div *ngIf="isLoad">
+
+
+      <app-main *ngIf="isLoggedIn"></app-main>
+
+
+      <router-outlet *ngIf="!isLoggedIn"></router-outlet>
+
+
+      <router-outlet *ngIf="isError"></router-outlet>
+
+
+    </div>
+  </div>
+-->

@@ -1,3 +1,4 @@
+import { LoginModule } from './login/login.module';
 import { AppSharedModule } from './../@shared-module/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -21,17 +22,22 @@ import { App500errorComponent } from './errors/500/app500error.component';
 import { App401errorComponent } from './errors/401/app401error/app401error.component';
 import { App403errorComponent } from './errors/403/app403error/app403error.component';
 import { App404errorComponent } from './errors/404/app404error/app404error.component';
+
+import { SignupModule } from './signup/signup.module';
+
 @NgModule({
-  declarations: [AppComponent, App500errorComponent, App401errorComponent, App403errorComponent],
+  declarations: [AppComponent, App404errorComponent, App500errorComponent, App401errorComponent, App403errorComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     BaseModule,
     AppSharedModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AppMainModule
+    AppMainModule,
+    LoginModule,
+    SignupModule
   ],
   providers: [UserService, AuthService, IdentityService, MessageService, DataService],
   bootstrap: [AppComponent]
