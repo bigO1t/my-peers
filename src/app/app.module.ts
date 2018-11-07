@@ -14,6 +14,10 @@ import { DataService } from 'src/@shared-module/services/data.service';
 import { BaseModule } from 'src/@shared-module/base.module';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import { AppMainModule } from './main/main.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +26,10 @@ import { routes } from './app.routing';
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     BaseModule,
-    AppSharedModule
+    AppSharedModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AppMainModule
   ],
   providers: [UserService, AuthService, IdentityService, MessageService, DataService],
   bootstrap: [AppComponent]

@@ -1,8 +1,13 @@
+export interface IRating {
+  other_rating: number;
+  own_rating: number;
+  service_type: string;
+}
+
 export interface IUser {
-  FullUsername: string;
-  Username: string;
-  FirstName: string;
-  MiddleInitial: string;
-  LastName: string;
-  EmailAddress: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  ratings: IRating[];
 }
