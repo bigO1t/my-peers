@@ -23,7 +23,11 @@ export class LoginComponent implements OnInit {
     private dataService: DataService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => {
+      this.appSplashScreen.hide();
+    }, 4000);
+  }
 
   fetchUser(isLoggedIn) {
     return this.authService.getUser('npererar@gmail.com').subscribe(
