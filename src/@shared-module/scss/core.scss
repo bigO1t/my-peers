@@ -1,0 +1,14 @@
+// App
+@import 'app';
+// Theming
+@include mat-core();
+// Include theme styles for core and each component used in your app.
+@include angular-material-theme($theme);
+// Partials
+@import 'partials/reset';
+@import 'partials/normalize';
+@import 'partials/scrollbars';
+@import 'partials/helpers';
+@import 'partials/colors';
+@import 'partials/typography';
+@import 'partials/page-layouts';
