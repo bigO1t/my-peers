@@ -14,17 +14,20 @@ import { DataService } from 'src/@shared-module/services/data.service';
 import { BaseModule } from 'src/@shared-module/base.module';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routing';
+import { App500errorComponent } from './errors/500/app500error.component';
+import { MatButtonModule } from '@angular/material/button'
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, App500errorComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     BaseModule,
-    AppSharedModule
+    AppSharedModule,
+    MatButtonModule
   ],
   providers: [UserService, AuthService, IdentityService, MessageService, DataService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
