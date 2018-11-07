@@ -18,9 +18,12 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AppMainModule } from './main/main.module';
 import { App500errorComponent } from './errors/500/app500error.component';
+import { App400errorComponent } from './errors/401/app400error/app400error.component';
+import { App401errorComponent } from './errors/401/app401error/app401error.component';
+import { App404errorComponent } from './errors/401/app404error/app404error.component';
 
 @NgModule({
-  declarations: [AppComponent, App500errorComponent],
+  declarations: [AppComponent, App500errorComponent, App400errorComponent, App401errorComponent, App404errorComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     RouterModule.forRoot(routes),
