@@ -1,4 +1,3 @@
-import { AppSplashScreenService } from './../@shared-module/services/splash-screen.service';
 import { AppSharedModule } from './../@shared-module/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -14,8 +13,11 @@ import { DataService } from 'src/@shared-module/services/data.service';
 import { BaseModule } from 'src/@shared-module/base.module';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routing';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+import { AppMainModule } from './main/main.module';
 import { App500errorComponent } from './errors/500/app500error.component';
-import { MatButtonModule } from '@angular/material/button'
 
 @NgModule({
   declarations: [AppComponent, App500errorComponent],
@@ -25,9 +27,11 @@ import { MatButtonModule } from '@angular/material/button'
     BrowserAnimationsModule,
     BaseModule,
     AppSharedModule,
-    MatButtonModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AppMainModule
   ],
   providers: [UserService, AuthService, IdentityService, MessageService, DataService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
