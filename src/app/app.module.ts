@@ -1,3 +1,4 @@
+import { LoginModule } from './login/login.module';
 import { AppSharedModule } from './../@shared-module/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -18,18 +19,21 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AppMainModule } from './main/main.module';
 import { App500errorComponent } from './errors/500/app500error.component';
+import { SignupModule } from './signup/signup.module';
 
 @NgModule({
   declarations: [AppComponent, App500errorComponent],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     BaseModule,
     AppSharedModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AppMainModule
+    AppMainModule,
+    LoginModule,
+    SignupModule
   ],
   providers: [UserService, AuthService, IdentityService, MessageService, DataService],
   bootstrap: [AppComponent]
