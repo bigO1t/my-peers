@@ -1,4 +1,3 @@
-import { AppSplashScreenService } from './../@shared-module/services/splash-screen.service';
 import { AppSharedModule } from './../@shared-module/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -18,9 +17,10 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AppMainModule } from './main/main.module';
+import { App500errorComponent } from './errors/500/app500error.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, App500errorComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     RouterModule.forRoot(routes),
