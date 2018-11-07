@@ -19,7 +19,7 @@ const config = {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'My Peers';
+  title = 'My Peers!!';
 
   constructor(private appSplashScreen: AppSplashScreenService) {}
 
