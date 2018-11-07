@@ -1,0 +1,6 @@
+<h1 matDialogTitle>{{confirmTitle}}</h1>
+<div mat-dialog-content>{{confirmMessage}}</div>
+<div mat-dialog-actions class="pt-24">
+  <button  mat-raised-button class="mat-warn mr-16" *ngIf = "showConfirm" (click)="dialogRef.close(true)">{{confirmButtonTitle}}</button>
+  <button mat-button color="accent" (click)="dialogRef.close(false)" cdkFocusInitial>{{cancelTitle}}</button>
+</div>
