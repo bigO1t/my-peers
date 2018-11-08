@@ -1,3 +1,67 @@
-<p>
-  main works!
-</p>
+<div
+  id="app-main-content"
+  class="main page-layout fullwidth"
+  fxLayout="column"
+  fxLayoutGap="72px"
+  fxLayoutAlign="start center"
+>
+  <mat-toolbar color="primary" class="mat-elevation-z2">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+        <span><img src="../../assets/img/logo-round.png" width="35px"/></span>
+        <span class="white-fg">My Peers</span>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+        <button mat-icon-button><mat-icon class="white-fg">notifications</mat-icon></button>
+        <button mat-button [matMenuTriggerFor]="menu" class="white-fg">
+          <mat-icon>person</mat-icon> {{ user.first_name }} {{ user.last_name }}
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>portrait</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item (click)="logOut()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>LogOut</span>
+          </button>
+        </mat-menu>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="req-buttons-container" fxFlexAlign="center">
+    <div
+      class="req-buttons"
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayout.xs="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="100px"
+      fxLayoutGap.sm="50px"
+      fxLayoutGap.xs="50px"
+    >
+      <button
+        mat-raised-button
+        class="w-300 h-300"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        color="warn"
+      >
+        <mat-icon class="h-80 w-80 font-size-80 mb-20 white-fg">touch_app</mat-icon>
+        <div class="font-size-32 white-fg">Manual Request</div>
+      </button>
+
+      <button
+        mat-raised-button
+        class="w-300 h-300"
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        color="accent"
+      >
+        <mat-icon class="h-80 w-80 font-size-80 mb-20 white-fg">gradient</mat-icon>
+        <div class="font-size-32 white-fg">QR Request</div>
+      </button>
+    </div>
+  </div>
+</div>
