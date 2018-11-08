@@ -10,4 +10,5 @@ export interface IUser extends IBase {
   received: IRequest;
   paired_user: string;
   ratings: IRating[];
+  close_request: boolean;
 }

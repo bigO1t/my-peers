@@ -52,8 +52,7 @@ export class ManualRequestComponent implements OnInit {
       requester_email: user.key,
       item_name: this.itemNameFormControl.value,
       item_description: this.itemDescriptionControl.value,
-      item_category: this.categoryControl.value,
-      close: false
+      item_category: this.categoryControl.value
     };
 
     user.requested = request;
@@ -63,14 +62,7 @@ export class ManualRequestComponent implements OnInit {
     this.dataService.getDataList('users').subscribe((users: IUser[]) => {
       if (users && users.length > 0) {
         users
-          .filter(
-            x =>
-              !x.received &&
-              !x.paired_user &&
-              x.key !== user.key &&
-              !user.requested &&
-              x.received.close === false
-          )
+          .filter(x => !x.received && !x.paired_user && !x.close_request)
           .forEach(x => {
             x.received = request;
             this.dataService.addUpdateData('users', x);

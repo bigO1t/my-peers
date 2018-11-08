@@ -27,13 +27,14 @@ export class NotificationComponent implements OnInit {
     this.dataService.getData('users', this.data.user.paired_user).subscribe((ruser: IUser) => {
       ruser.paired_user = this.data.user.key;
       this.dataService.addUpdateData('users', ruser);
-      this.router.navigate(['/main/receiver']);
       this.dialogRef.close();
+      this.router.navigate(['/main/receiver']);
     });
   }
 
   cancel() {
-    this.data.user.received.close = true;
+    this.data.user.received = null;
+    this.data.user.close_request = true;
     this.dataService.addUpdateData('users', this.data.user);
     this.dialogRef.close();
   }

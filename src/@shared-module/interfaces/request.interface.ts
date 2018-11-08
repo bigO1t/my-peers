@@ -4,5 +4,4 @@ export interface IRequest {
   item_name: string;
   item_description: string;
   item_category: string;
-  close: boolean;
 }
