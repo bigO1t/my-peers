@@ -32,7 +32,7 @@ export class MainComponent implements OnInit {
       if (user.received && !user.paired_user) {
         const dialogRef = this.dialog.open(NotificationComponent, {
           width: '30%',
-          height: '30%',
+          height: '60%',
           autoFocus: false,
           data: { received: user.received, user: user }
         });
