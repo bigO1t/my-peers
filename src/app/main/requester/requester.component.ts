@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/@shared-module/services/user.service';
 import { DataService } from 'src/@shared-module/services/data.service';
 import { IUser } from 'src/@shared-module/interfaces/user.interface';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-requester',
@@ -11,6 +12,8 @@ import { IUser } from 'src/@shared-module/interfaces/user.interface';
 })
 export class RequesterComponent implements OnInit {
   user = <IUser>{};
+  electricalFormControl = new FormControl('');
+  emailFormControl = new FormControl('', [Validators.required]);
   constructor(
     private router: Router,
     private userService: UserService,
