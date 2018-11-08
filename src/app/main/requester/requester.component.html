@@ -1,7 +1,43 @@
-<div class="page-layout simple">
-  <div class="center">
-    <div class="content">
-      <button mat-raised-button color="accent" (click)="finish()">Test</button>
+<div
+  id="app-main-content"
+  class="main"
+  fxLayout="column"
+  fxLayoutGap="72px"
+  fxLayoutAlign="start center"
+>
+  <mat-toolbar color="primary" class="mat-elevation-z2">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+      <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+        <span><img src="./assets/img/logo-round.png" width="35px"/></span>
+        <span class="white-fg">My Peers</span>
+      </div>
+
+      <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+        <button mat-icon-button><mat-icon class="white-fg">notifications</mat-icon></button>
+        <button mat-button [matMenuTriggerFor]="menu" class="white-fg">
+          <mat-icon>person</mat-icon> {{ user?.first_name }} {{ user?.last_name }}
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>portrait</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item (click)="logOut()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>LogOut</span>
+          </button>
+        </mat-menu>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="page-layout simple">
+    <div class="center">
+      <div class="content">
+        <button mat-raised-button color="accent" (click)="finish()">
+          <mat-icon class="white-fg">time_to_leave</mat-icon>
+          Finish
+        </button>
+      </div>
     </div>
   </div>
 </div>
