@@ -59,7 +59,7 @@ export class ManualRequestComponent implements OnInit {
 
     this.dataService.addUpdateData('users', user);
 
-    const sub = this.dataService.getDataList('users').subscribe((users: IUser[]) => {
+    this.dataService.getDataList('users').subscribe((users: IUser[]) => {
       if (users && users.length > 0) {
         users
           .filter(x => !x.requested && !x.received && !x.paired_user && !x.close_request)
@@ -68,10 +68,8 @@ export class ManualRequestComponent implements OnInit {
             this.dataService.addUpdateData('users', x);
           });
         this.dialogRef.close();
-        sub.unsubscribe();
         return;
       }
-      sub.unsubscribe();
       this.messageService.handleError<any>('Error getting users');
     });
   }

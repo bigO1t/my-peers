@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import 'firebase/firestore';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { IBase } from '../interfaces/base.interface';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class DataService {
@@ -42,5 +42,12 @@ export class DataService {
       .collection(collectionName)
       .doc(key)
       .get();
+  }
+
+  deleteField(field, key, collectionName) {
+    return this.db
+      .collection(collectionName)
+      .doc(key)
+      .update({ field: firebase.firestore.FieldValue.delete() });
   }
 }
