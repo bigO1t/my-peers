@@ -8,13 +8,6 @@ import { IBase } from '../interfaces/base.interface';
 export class DataService {
   constructor(public db: AngularFirestore, private router: Router) {}
 
-  addData(collectionName: string, obj?) {
-    this.db
-      .collection(collectionName)
-      .doc(obj.key)
-      .set(obj);
-  }
-
   getData(collectionName: string, key: string) {
     return this.db
       .collection(collectionName)
@@ -22,10 +15,10 @@ export class DataService {
       .snapshotChanges();
   }
 
-  updateData<T>(key: string, collectionName: string, obj?: T) {
-    return this.db
+  addUpdateData(collectionName: string, obj?) {
+    this.db
       .collection(collectionName)
-      .doc(key)
+      .doc(obj.key)
       .set(obj);
   }
 
@@ -40,14 +33,10 @@ export class DataService {
     return this.db.collection(collectionName).snapshotChanges();
   }
 
-  search(searchEmail: string) {
+  search(key: string, collectionName: string) {
     return this.db
-      .collection('users')
-      .doc(searchEmail)
+      .collection(collectionName)
+      .doc(key)
       .get();
-  }
-
-  goToError() {
-    this.router.navigate(['/errors/error500']);
   }
 }

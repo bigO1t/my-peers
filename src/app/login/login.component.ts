@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.dataService.addData('users', {
+    // this.dataService.addUpdateData('users', {
     //   key: 'learn.patel@gmail.com',
     //   first_name: 'Bhavesh',
     //   last_name: 'Patel',
@@ -43,12 +43,13 @@ export class LoginComponent implements OnInit {
   }
 
   fetchUser(isLoggedIn) {
-    return this.dataService.search(this.emailControl.value).subscribe(
+    return this.dataService.search(this.emailControl.value, 'users').subscribe(
       doc => {
         if (doc.exists) {
           let user = doc.data();
           if (user.password === this.passwordControl.value) {
             console.log(user);
+            this.userService.currentUser = user;
             isLoggedIn(true);
             return;
           }
@@ -58,7 +59,7 @@ export class LoginComponent implements OnInit {
         );
         isLoggedIn(false);
       },
-      error => {
+      () => {
         isLoggedIn(false);
         this.messageService.handleError<any>('Error Getting Data');
       }
