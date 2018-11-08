@@ -69,7 +69,7 @@ export class ManualRequestComponent implements OnInit {
               !x.paired_user &&
               x.key !== user.key &&
               !user.requested &&
-              !x.received.close
+              x.received.close === false
           )
           .forEach(x => {
             x.received = request;
