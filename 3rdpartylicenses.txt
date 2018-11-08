@@ -1,18 +1,6 @@
 my-peers
 MIT
 
-@firebase/logger
-Apache-2.0
-
-@firebase/firestore
-Apache-2.0
-
-@firebase/app
-Apache-2.0
-
-@firebase/util
-Apache-2.0
-
 tslib
 Apache-2.0
 Apache License
@@ -71,6 +59,18 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 
 END OF TERMS AND CONDITIONS
 
+
+@firebase/firestore
+Apache-2.0
+
+@firebase/app
+Apache-2.0
+
+@firebase/util
+Apache-2.0
+
+@firebase/logger
+Apache-2.0
 
 hammerjs
 MIT
@@ -413,6 +413,8 @@ MIT
 
 @angular/material/snack-bar
 
+@angular/material/core
+
 @angular/flex-layout
 MIT
 <<<<<<< HEAD
@@ -643,9 +645,11 @@ THE SOFTWARE.
 >>>>>>> Initial commit
 
 
-@angular/material/card
+@angular/material/icon
 
 @angular/material/form-field
+
+@angular/material/select
 
 firebase/firestore
 
@@ -860,6 +864,14 @@ Apache-2.0
  limitations under the License.
  
 
+
+@angular/material/card
+
+@angular/material/slider
+
+@angular/material/toolbar
+
+@angular/material/menu
 
 core-js
 MIT
