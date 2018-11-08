@@ -30,7 +30,7 @@ export class DataService {
   }
 
   getDataList(collectionName: string) {
-    return this.db.doc(collectionName).valueChanges();
+    return this.db.collection(collectionName).valueChanges();
   }
 
   getDataListLive(collectionName: string) {
