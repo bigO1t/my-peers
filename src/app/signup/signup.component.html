@@ -43,10 +43,24 @@
               Password is <strong>required</strong>
             </mat-error>
         </mat-form-field>
+        <br>
+            <mat-card-title class="signup-card-title">Self rating for Categories</mat-card-title>
+            <mat-label>Flooring</mat-label>
+
+            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" [formControl]="floorFormControl"></mat-slider>
+
+            <mat-label>Electrical</mat-label>
+
+            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" [formControl]="electricalFormControl"></mat-slider>
+
+            <mat-label>Plumbing</mat-label>
+
+            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="10" [formControl]="plumbingFormControl"></mat-slider>
+
       </form>
     </mat-card-content>
     <mat-card-actions class="m-16 ml-32 mr-32" fxLayout="row" fxLayoutGap="10px">
-      <button mat-raised-button (click)="signUp()" color="primary" class="white-fg">Sign Up</button>
+      <button mat-raised-button (click)="signUp()" [disabled]="disabled" color="primary" class="white-fg">Sign Up</button>
 
     </mat-card-actions>
   </mat-card>

@@ -19,6 +19,7 @@ export class SignupComponent implements OnInit {
     private dataService: DataService
   ) {}
 
+  disabled = false;
   firstNameFormControl = new FormControl('', [
     Validators.required
   ]);
@@ -37,16 +38,50 @@ export class SignupComponent implements OnInit {
     Validators.minLength(3)
   ]);
 
+  floorFormControl = new FormControl('');
+
+  electricalFormControl = new FormControl('');
+
+  plumbingFormControl = new FormControl('');
+
   ngOnInit() {
 
   }
 
   signUp() {
-    console.log(this.firstNameFormControl.value);
-    console.log(this.lastNameFormControl.value);
-    console.log(this.emailFormControl.value);
-    console.log(this.passwordFormControl.value);
+    this.dataService.addUpdateData('users', {
+      key: this.emailFormControl.value,
+      first_name: this.firstNameFormControl.value,
+      last_name: this.lastNameFormControl.value,
+      password: this.passwordFormControl.value,
+      ratings: [
+        {
+          other_rating: 1,
+          own_rating: this.floorFormControl.value,
+          service_type: 'flooring'
+        },
+        {
+          other_rating: 1,
+          own_rating: this.electricalFormControl.value,
+          service_type: 'electrical'
+        },
+        {
+          other_rating: 1,
+          own_rating: this.plumbingFormControl.value,
+          service_type: 'plumbing'
+        }
+      ]
+    });
   }
+
+    formatLabel(value: number | null) {
+      if (!value) {
+        return 0;
+      }
+      return value;
+    }
+
+
 }
 
 
