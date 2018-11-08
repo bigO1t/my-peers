@@ -21,6 +21,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.appSplashScreen.hide();
-    }, 1000);
+    }, 4000);
   }
 }

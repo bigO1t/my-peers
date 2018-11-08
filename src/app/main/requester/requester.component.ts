@@ -26,12 +26,7 @@ export class RequesterComponent implements OnInit {
 
   finish() {
     this.dataService.search(this.user.paired_user, 'users').subscribe(doc => {
-      if (doc.exists) {
-        let pairedUser = doc.data();
-        pairedUser.paired_user = null;
-        this.dataService.addUpdateData('users', pairedUser);
-      }
-      this.user.paired_user = null;
+      this.user.close_request = false;
       this.dataService.addUpdateData('users', this.user);
     });
   }
