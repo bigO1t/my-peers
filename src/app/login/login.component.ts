@@ -1,9 +1,11 @@
+import { ILoginUser } from './login-user.interface';
 import { Component, OnInit } from '@angular/core';
 import { AppSplashScreenService } from 'src/@shared-module/services/splash-screen.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/@shared-module/services/auth.service';
 import { UserService } from 'src/@shared-module/services/user.service';
 import { DataService } from 'src/@shared-module/services/data.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +13,10 @@ import { DataService } from 'src/@shared-module/services/data.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  isLoad: boolean | null = null;
-  isError = false;
-  isLoggedIn = false;
+  loginUser: ILoginUser = <ILoginUser>{};
+
+  emailControl = new FormControl('', [Validators.required, Validators.email]);
+  passwordControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
 
   constructor(
     private appSplashScreen: AppSplashScreenService,
@@ -26,7 +29,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.appSplashScreen.hide();
-    }, 4000);
+    }, 1000);
   }
 
   fetchUser(isLoggedIn) {
@@ -39,18 +42,15 @@ export class LoginComponent implements OnInit {
       },
       error => {
         isLoggedIn(false);
-        if (error.status === 401) {
-          this.isError = false;
-          this.authService.goToUnauthorized();
-          return;
-        }
-        this.isError = true;
-        this.authService.goToError();
       }
     );
   }
 
-  login() {}
+  login() {
+    if (this.emailControl.invalid || this.passwordControl.invalid) {
+      return;
+    }
+  }
 
   signUp() {
     this.router.navigate(['/signup']);
