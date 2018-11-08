@@ -33,7 +33,7 @@ export class NotificationComponent implements OnInit {
           users
             .filter(x => x.received)
             .forEach(x => {
-              this.dataService.deleteField('received', 'x.key', 'users');
+              this.dataService.deleteField('received', x.key, 'users');
               //x.received = null;
               x.close_request = false;
               this.dataService.addUpdateData('users', x);

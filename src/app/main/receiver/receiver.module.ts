@@ -1,11 +1,9 @@
+import { AppSharedModule } from './../../../@shared-module/shared.module';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReceiverComponent } from './receiver.component';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [AppSharedModule],
   declarations: [ReceiverComponent]
 })
-export class ReceiverModule { }
+export class ReceiverModule {}

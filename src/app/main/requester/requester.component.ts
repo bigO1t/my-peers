@@ -25,11 +25,11 @@ export class RequesterComponent implements OnInit {
     this.dataService.search(this.user.paired_user, 'users').subscribe(doc => {
       if (doc.exists) {
         let pairedUser = doc.data();
-        this.dataService.deleteField('paired_user', 'pairedUser.key', 'users');
+        this.dataService.deleteField('paired_user', pairedUser.key, 'users');
         //pairedUser.paired_user = null;
         this.dataService.addUpdateData('users', pairedUser);
       }
-      this.dataService.deleteField('paired_user', 'user.key', 'users');
+      this.dataService.deleteField('paired_user', this.user.key, 'users');
       this.dataService.addUpdateData('users', this.user);
     });
   }
