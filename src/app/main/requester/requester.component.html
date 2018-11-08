@@ -33,6 +33,25 @@
   <div class="page-layout simple">
     <div class="center">
       <div class="content">
+        <mat-form-field>
+              <mat-label>Leave a comment</mat-label>
+              <textarea matInput placeholder="Leave a comment" [formControl]="emailFormControl" ></textarea>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Comment is <strong>required</strong>
+              </mat-error>
+        </mat-form-field>
+
+      <mat-label>Rating</mat-label>
+
+      <mat-slider
+                thumbLabel
+                [displayWith]="formatLabel"
+                tickInterval="1"
+                min="1"
+                max="10"
+                [formControl]="electricalFormControl">
+			</mat-slider>
+
         <button mat-raised-button color="accent" (click)="finish()">
           <mat-icon class="white-fg">time_to_leave</mat-icon>
           Finish
