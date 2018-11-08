@@ -28,12 +28,13 @@ export class NotificationComponent implements OnInit {
       ruser.paired_user = this.data.user.key;
       this.dataService.addUpdateData('users', ruser);
       this.data.user.close_request = true;
-      this.dataService.getDataListLive('users').subscribe((users: IUser[]) => {
+      this.dataService.getDataList('users').subscribe((users: IUser[]) => {
         if (users && users.length > 0) {
           users
             .filter(x => x.received)
             .forEach(x => {
-              x.received = null;
+              this.dataService.deleteField('received', 'x.key', 'users');
+              //x.received = null;
               x.close_request = false;
               this.dataService.addUpdateData('users', x);
             });
