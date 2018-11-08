@@ -41,4 +41,11 @@ export class RequesterComponent implements OnInit {
     this.userService.logout();
     this.router.navigate(['/login']);
   }
+
+  formatLabel(value: number | null) {
+    if (!value) {
+      return 0;
+    }
+    return value;
+  }
 }
