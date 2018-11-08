@@ -21,26 +21,7 @@ export class LoginComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
-  ngOnInit() {
-    // this.dataService.addUpdateData('users', {
-    //   key: 'learn.patel@gmail.com',
-    //   first_name: 'Bhavesh',
-    //   last_name: 'Patel',
-    //   password: '123',
-    //   ratings: [
-    //     {
-    //       other_rating: 10,
-    //       own_rating: 9,
-    //       service_type: 'flooring'
-    //     },
-    //     {
-    //       other_rating: 9,
-    //       own_rating: 10,
-    //       service_type: 'electrical'
-    //     }
-    //   ]
-    // });
-  }
+  ngOnInit() {}
 
   fetchUser(isLoggedIn) {
     return this.dataService.search(this.emailControl.value, 'users').subscribe(

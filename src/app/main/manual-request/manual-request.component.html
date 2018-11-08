@@ -1,3 +1,67 @@
-<p>
-  manual-request works!
-</p>
+<div class="h-100-p" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <h1 mat-dialog-title>{{ title }}</h1>
+    <button mat-icon-button type="button" (click)="cancel()" class="dialog-close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <form class="h-100-p" fxLayout="column">
+    <div mat-dialog-content class="h-100-p">
+      <div fxLayout="column" fxLayoutWrap fxLayoutGap="24px" fxLayoutAlign="start">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Item Name"
+            name="itemName"
+            [formControl]="itemNameFormControl"
+            required
+          />
+          <mat-error *ngIf="itemNameFormControl.hasError('required')">
+            Item Name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Item Description"
+            name="itemDescription"
+            [formControl]="itemDescriptionControl"
+            required
+          />
+          <mat-error *ngIf="itemDescriptionControl.hasError('required')">
+            Item Description is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select
+            placeholder="Category"
+            name="category"
+            [(ngModel)]="selectedCategory"
+            [formControl]="categoryControl"
+            required
+          >
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="categoryControl.hasError('required')">
+            Category is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-dialog-actions align="end">
+      <section>
+        <button mat-raised-button type="submit" color="primary" (click)="sendRequest()">
+          <mat-icon class="white-fg s-16 mb-4">forward</mat-icon>
+          Send Request
+        </button>
+        <button mat-raised-button type="button" color="accent" (click)="cancel()">
+          <mat-icon class="white-fg s-16 mb-4">clear</mat-icon>
+          Cancel
+        </button>
+      </section>
+    </mat-dialog-actions>
+  </form>
+</div>

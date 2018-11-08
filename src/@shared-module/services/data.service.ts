@@ -12,7 +12,7 @@ export class DataService {
     return this.db
       .collection(collectionName)
       .doc(key)
-      .snapshotChanges();
+      .valueChanges();
   }
 
   addUpdateData(collectionName: string, obj?) {
@@ -30,7 +30,7 @@ export class DataService {
   }
 
   getDataList(collectionName: string) {
-    return this.db.collection(collectionName).snapshotChanges();
+    return this.db.collection(collectionName).valueChanges();
   }
 
   search(key: string, collectionName: string) {

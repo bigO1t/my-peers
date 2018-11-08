@@ -16,7 +16,7 @@ export class UserService {
     localStorage.setItem(`${this.appNameAbbrev}_user`, JSON.stringify(user));
   }
 
-  logout(isLoggedIn): void {
-    isLoggedIn(false);
+  logout(): void {
+    localStorage.removeItem(`${this.appNameAbbrev}_user`);
   }
 }

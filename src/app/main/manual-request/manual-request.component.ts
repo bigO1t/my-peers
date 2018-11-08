@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { UserService } from './../../../@shared-module/services/user.service';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
+import { FormControl, Validators } from '@angular/forms';
+import { DataService } from 'src/@shared-module/services/data.service';
+import { MessageService } from 'src/@shared-module/services/message.service';
+import { IUser, IRequest } from 'src/@shared-module/interfaces/user.interface';
 
 @Component({
   selector: 'app-manual-request',
@@ -6,7 +12,88 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manual-request.component.scss']
 })
 export class ManualRequestComponent implements OnInit {
-  constructor() {}
+  title = 'Manual Request';
+  width = '60%';
+  height = '60%';
+
+  categories = ['Plumbling', 'Flooring', 'Electricity'];
+
+  itemNameFormControl = new FormControl('', [Validators.required]);
+
+  itemDescriptionControl = new FormControl('', [Validators.required]);
+
+  categoryControl = new FormControl('', [Validators.required]);
+
+  constructor(
+    public dialogRef: MatDialogRef<ManualRequestComponent>,
+    private dataService: DataService,
+    private userService: UserService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit() {}
+
+  sendRequest() {
+    if (
+      this.itemNameFormControl.invalid ||
+      this.itemDescriptionControl.invalid ||
+      this.categoryControl.invalid
+    ) {
+      return;
+    }
+
+    const user = this.userService.currentUser;
+
+    const request: IRequest = {
+      requester_first_name: user.first_name,
+      item_name: this.itemNameFormControl.value,
+      item_description: this.itemDescriptionControl.value,
+      item_category: this.categoryControl.value
+    };
+
+    this.userService.currentUser.requested = request;
+
+    this.dataService.addUpdateData('users', user);
+
+    this.dataService.getDataList('users').subscribe((users: IUser[]) => {
+      if (users && users.length > 0) {
+        users
+          .filter(x => !x.received || (!x.paired_user && x.key !== user.key))
+          .forEach(x => {
+            x.received = request;
+            this.dataService.addUpdateData('users', x);
+          });
+        return;
+      }
+      this.messageService.handleError<any>('Error getting users');
+    });
+  }
+
+  cancel() {
+    this.dialogRef.close();
+  }
+
+  adaptToSmallScreen() {
+    if (window.innerWidth < 960) {
+      this.width = '100%';
+    }
+
+    if (window.innerHeight < 800) {
+      this.height = '100%';
+    }
+
+    this.dialogRef.updateSize(this.width, this.height);
+  }
+
+  @HostListener('keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.adaptToSmallScreen();
+  }
 }

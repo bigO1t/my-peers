@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AppSplashScreenService } from 'src/@shared-module/services/splash-screen.service';
 import { Router } from '@angular/router';
-import { UserService } from 'src/@shared-module/services/user.service';
 import { DataService } from 'src/@shared-module/services/data.service';
 import { FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
 
 @Component({
   selector: 'app-signup',
@@ -12,31 +9,16 @@ import { ErrorStateMatcher } from '@angular/material';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  constructor(
-    private appSplashScreen: AppSplashScreenService,
-    private router: Router,
-    private userService: UserService,
-    private dataService: DataService
-  ) {}
+  constructor(private router: Router, private dataService: DataService) {}
 
   disabled = false;
-  firstNameFormControl = new FormControl('', [
-    Validators.required
-  ]);
+  firstNameFormControl = new FormControl('', [Validators.required]);
 
-  lastNameFormControl = new FormControl('', [
-    Validators.required
-  ]);
+  lastNameFormControl = new FormControl('', [Validators.required]);
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email
-  ]);
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
-  passwordFormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(3)
-  ]);
+  passwordFormControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
 
   floorFormControl = new FormControl('');
 
@@ -44,9 +26,7 @@ export class SignupComponent implements OnInit {
 
   plumbingFormControl = new FormControl('');
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   signUp() {
     this.dataService.addUpdateData('users', {
@@ -54,6 +34,9 @@ export class SignupComponent implements OnInit {
       first_name: this.firstNameFormControl.value,
       last_name: this.lastNameFormControl.value,
       password: this.passwordFormControl.value,
+      requested: {},
+      received: {},
+      paired_user: {},
       ratings: [
         {
           other_rating: 1,
@@ -75,14 +58,10 @@ export class SignupComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-    formatLabel(value: number | null) {
-      if (!value) {
-        return 0;
-      }
-      return value;
+  formatLabel(value: number | null) {
+    if (!value) {
+      return 0;
     }
-
-
+    return value;
+  }
 }
-
-
