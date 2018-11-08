@@ -16,9 +16,16 @@ export class AppComponent implements OnInit {
 
   baseUrl: string;
 
-  constructor(@Inject('BASE_URL') baseUrl: string) {
+  constructor(
+    private appSplashScreen: AppSplashScreenService,
+    @Inject('BASE_URL') baseUrl: string
+  ) {
     this.baseUrl = baseUrl;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    setTimeout(() => {
+      this.appSplashScreen.hide();
+    }, 1000);
+  }
 }

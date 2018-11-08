@@ -19,18 +19,13 @@ export class LoginComponent implements OnInit {
   passwordControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
 
   constructor(
-    private appSplashScreen: AppSplashScreenService,
     private router: Router,
     private authService: AuthService,
     private userService: UserService,
     private dataService: DataService
   ) {}
 
-  ngOnInit() {
-    setTimeout(() => {
-      this.appSplashScreen.hide();
-    }, 1000);
-  }
+  ngOnInit() {}
 
   fetchUser(isLoggedIn) {
     return this.authService.getUser('npererar@gmail.com').subscribe(
