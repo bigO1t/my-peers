@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppSplashScreenService } from 'src/@shared-module/services/splash-screen.service';
 
 @Component({
   selector: 'app-app404error',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class App404errorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private appSplashScreen: AppSplashScreenService) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.appSplashScreen.hide();
+    }, 200);
   }
 
 }
