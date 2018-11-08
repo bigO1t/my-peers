@@ -54,9 +54,7 @@ export class LoginComponent implements OnInit {
             return;
           }
         }
-        this.messageService.handleError<any>(
-          'Does not exist an user with this email and/or password'
-        );
+        this.messageService.handleError<any>("Email and/or password doesn't exist");
         isLoggedIn(false);
       },
       () => {
