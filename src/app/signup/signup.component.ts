@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppSplashScreenService } from 'src/@shared-module/services/splash-screen.service';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/@shared-module/services/auth.service';
 import { UserService } from 'src/@shared-module/services/user.service';
 import { DataService } from 'src/@shared-module/services/data.service';
 import { FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
@@ -16,7 +15,6 @@ export class SignupComponent implements OnInit {
   constructor(
     private appSplashScreen: AppSplashScreenService,
     private router: Router,
-    private authService: AuthService,
     private userService: UserService,
     private dataService: DataService
   ) {}
