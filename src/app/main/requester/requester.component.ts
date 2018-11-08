@@ -33,4 +33,9 @@ export class RequesterComponent implements OnInit {
       this.dataService.addUpdateData('users', this.user);
     });
   }
+
+  logOut() {
+    this.userService.logout();
+    this.router.navigate(['/login']);
+  }
 }
