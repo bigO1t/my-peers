@@ -19,9 +19,13 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private dataService: DataService,
     private messageService: MessageService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.userService.currentUser) {
+      this.router.navigate(['/main']);
+    }
+  }
 
   fetchUser(isLoggedIn) {
     return this.dataService.search(this.emailControl.value, 'users').subscribe(
