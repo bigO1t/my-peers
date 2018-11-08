@@ -22,6 +22,7 @@ export class RequesterComponent implements OnInit {
   ngOnInit() {}
 
   finish() {
+    this.user.paired_user = null;
     this.dataService.addUpdateData('users', this.user);
   }
 }
