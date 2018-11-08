@@ -27,6 +27,20 @@ export class NotificationComponent implements OnInit {
     this.dataService.getData('users', this.data.user.paired_user).subscribe((ruser: IUser) => {
       ruser.paired_user = this.data.user.key;
       this.dataService.addUpdateData('users', ruser);
+      this.data.user.close_request = true;
+      this.dataService.getDataList('users').subscribe((users: IUser[]) => {
+        if (users && users.length > 0) {
+          users
+            .filter(x => x.received && x.received.requester_email === ruser.key)
+            .forEach(x => {
+              x.received = null;
+              x.close_request = false;
+              this.dataService.addUpdateData('users', x);
+            });
+          this.dialogRef.close();
+          return;
+        }
+      });
       this.dialogRef.close();
       this.router.navigate(['/main/receiver']);
     });

@@ -59,17 +59,19 @@ export class ManualRequestComponent implements OnInit {
 
     this.dataService.addUpdateData('users', user);
 
-    this.dataService.getDataList('users').subscribe((users: IUser[]) => {
+    const sub = this.dataService.getDataList('users').subscribe((users: IUser[]) => {
       if (users && users.length > 0) {
         users
-          .filter(x => !x.received && !x.paired_user && !x.close_request)
+          .filter(x => !x.requested && !x.received && !x.paired_user && !x.close_request)
           .forEach(x => {
             x.received = request;
             this.dataService.addUpdateData('users', x);
           });
+        sub.unsubscribe();
         this.dialogRef.close();
         return;
       }
+      sub.unsubscribe();
       this.messageService.handleError<any>('Error getting users');
     });
   }

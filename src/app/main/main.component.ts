@@ -39,6 +39,9 @@ export class MainComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(_ => {});
       }
+      if (user.paired_user) {
+        this.router.navigate(['/main/requester']);
+      }
     });
   }
 
