@@ -26,11 +26,11 @@ export class ReceiverComponent implements OnInit {
       if (doc.exists) {
         let pairedUser = doc.data();
         this.dataService.deleteField('paired_user', pairedUser.key, 'users');
-        //pairedUser.paired_user = null;
-        this.dataService.addUpdateData('users', pairedUser);
+        // pairedUser.paired_user = null;
+        // this.dataService.addUpdateData('users', pairedUser);
       }
       this.dataService.deleteField('paired_user', this.user.key, 'users');
-      this.dataService.addUpdateData('users', this.user);
+      // this.dataService.addUpdateData('users', this.user);
     });
   }
 
