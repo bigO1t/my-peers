@@ -29,7 +29,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.getData('users', 'jum@test.com').subscribe((user: IUser) => {
-      if (!user.close_request && user.key.indexOf('jum') < 0) {
+      if (!user.close_request && this.user.key.indexOf('jum') < 0) {
         const dialogRef = this.dialog.open(NotificationComponent, {
           width: '30%',
           height: '60%',
