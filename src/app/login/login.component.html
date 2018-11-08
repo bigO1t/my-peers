@@ -12,23 +12,12 @@
           <mat-label>Email</mat-label>
           <input
             matInput
+            #emailInput
             placeholder="Email"
             name="email"
             type="email"
             [formControl]="emailControl"
-            [(ngModel)]="loginUser.email"
           />
-          <button
-            matButton
-            *ngIf="loginUser.email"
-            tabindex="-1"
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="loginUser.email = ''"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
           <mat-error *ngIf="emailControl.hasError('required')">
             Email is <strong>required</strong>
           </mat-error>
@@ -44,19 +33,7 @@
             name="password"
             type="password"
             [formControl]="passwordControl"
-            [(ngModel)]="loginUser.password"
           />
-          <button
-            matButton
-            *ngIf="loginUser.password"
-            tabindex="-1"
-            matSuffix
-            mat-icon-button
-            aria-label="Clear"
-            (click)="loginUser.password = ''"
-          >
-            <mat-icon>close</mat-icon>
-          </button>
           <mat-error *ngIf="passwordControl.hasError('required')">
             Password is <strong>required</strong>
           </mat-error>

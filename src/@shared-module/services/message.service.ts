@@ -42,32 +42,14 @@ export class MessageService {
     this.messages = [];
   }
 
-  /**
-   * Handle Http operation that failed.
-   * Let the app continue.
-   * @param operation - name of the operation that failed
-   * @param result - optional value to return as the observable result
-   **/
-  handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.log(error);
-      let  errorMsg  =
-        error.error  &&  error.error.Messages  &&  error.error.Messages.length  >  0
-          ?  error.error.Messages.join(', ')
-          :  error.message;
+  handleError<T>(errorMsg = '', result?: T) {
+    console.log(`${errorMsg}`);
 
-      if (error.status === 409) {
-        errorMsg = error.error;
-      }
+    console.error(`${errorMsg}`);
 
-      console.log(`${operation} failed: ${errorMsg}`);
+    this.log('Error', errorMsg, 'error');
 
-      console.error(`${operation} failed: ${errorMsg}`); // log to console instead
-
-      this.log('Error', errorMsg, 'error');
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+    // Let the app keep running by returning an empty result.
+    return of(result as T);
   }
 }

@@ -1,11 +1,9 @@
-import { ILoginUser } from './login-user.interface';
 import { Component, OnInit } from '@angular/core';
-import { AppSplashScreenService } from 'src/@shared-module/services/splash-screen.service';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/@shared-module/services/auth.service';
 import { UserService } from 'src/@shared-module/services/user.service';
 import { DataService } from 'src/@shared-module/services/data.service';
 import { FormControl, Validators } from '@angular/forms';
+import { MessageService } from 'src/@shared-module/services/message.service';
 
 @Component({
   selector: 'app-login',
@@ -13,30 +11,56 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginUser: ILoginUser = <ILoginUser>{};
-
   emailControl = new FormControl('', [Validators.required, Validators.email]);
   passwordControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
 
   constructor(
     private router: Router,
-    private authService: AuthService,
     private userService: UserService,
-    private dataService: DataService
+    private dataService: DataService,
+    private messageService: MessageService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.dataService.addData('users', {
+    //   key: 'learn.patel@gmail.com',
+    //   first_name: 'Bhavesh',
+    //   last_name: 'Patel',
+    //   password: '123',
+    //   ratings: [
+    //     {
+    //       other_rating: 10,
+    //       own_rating: 9,
+    //       service_type: 'flooring'
+    //     },
+    //     {
+    //       other_rating: 9,
+    //       own_rating: 10,
+    //       service_type: 'electrical'
+    //     }
+    //   ]
+    // });
+  }
 
   fetchUser(isLoggedIn) {
-    return this.authService.getUser('npererar@gmail.com').subscribe(
-      (user: any) => {
-        if (user) {
-          isLoggedIn(true);
+    return this.dataService.search(this.emailControl.value).subscribe(
+      doc => {
+        if (doc.exists) {
+          let user = doc.data();
+          if (user.password === this.passwordControl.value) {
+            console.log(user);
+            isLoggedIn(true);
+            return;
+          }
         }
+        this.messageService.handleError<any>(
+          'Does not exist an user with this email and/or password'
+        );
         isLoggedIn(false);
       },
       error => {
         isLoggedIn(false);
+        this.messageService.handleError<any>('Error Getting Data');
       }
     );
   }
@@ -45,6 +69,11 @@ export class LoginComponent implements OnInit {
     if (this.emailControl.invalid || this.passwordControl.invalid) {
       return;
     }
+    this.fetchUser(isLoggedIn => {
+      if (isLoggedIn) {
+        this.router.navigate(['/main']);
+      }
+    });
   }
 
   signUp() {

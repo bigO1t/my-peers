@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import 'firebase/firestore';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { IBase } from '../interfaces/base.interface';
 
 @Injectable()
 export class DataService {
-  constructor(public db: AngularFirestore) {}
+  constructor(public db: AngularFirestore, private router: Router) {}
 
-  addData<T>(collectionName: string, obj?: T) {
-    return this.db.collection(collectionName).add(obj);
+  addData(collectionName: string, obj?) {
+    this.db
+      .collection(collectionName)
+      .doc(obj.key)
+      .set(obj);
   }
 
   getData(collectionName: string, key: string) {
@@ -35,11 +40,14 @@ export class DataService {
     return this.db.collection(collectionName).snapshotChanges();
   }
 
-  searchEmail(searchEmail: string) {
+  search(searchEmail: string) {
     return this.db
-      .collection('users', ref =>
-        ref.where('email', '>=', searchEmail).where('email', '<=', searchEmail + '\uf8ff')
-      )
-      .snapshotChanges();
+      .collection('users')
+      .doc(searchEmail)
+      .get();
+  }
+
+  goToError() {
+    this.router.navigate(['/errors/error500']);
   }
 }
