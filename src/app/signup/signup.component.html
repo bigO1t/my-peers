@@ -1,1 +1,53 @@
-<div class="w-100-p"><p>signup works!</p></div>
+<div class="signup" fxLayout="row" fxFlexAlign="center center">
+  <mat-card class="signup-card p-0 pb-16">
+    <mat-card-header class="primary-bg m-0 p-8" fxLayout="row" fxFlexAlign="start center">
+      <div mat-card-avatar class="header-image ml-16">
+        <img src="../assets/img/user_icon.png" />
+      </div>
+      <mat-card-title class="white-fg mt-8">Sign Up</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="m-32">
+      <form class="my-form" fxLayout="column">
+        <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="FirstName" [formControl]="firstNameFormControl"/>
+            <mat-error *ngIf="firstNameFormControl.hasError('required')">
+                First Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="LastName" [formControl]="lastNameFormControl"/>
+            <mat-error *ngIf="lastNameFormControl.hasError('required')">
+                Last Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" [formControl]="emailFormControl"
+          [errorStateMatcher]="matcher"/>
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password" name="password" type="password" [formControl]="passwordFormControl" required minlength/>
+          <mat-error *ngIf="passwordFormControl.hasError('minlength') && !passwordFormControl.hasError('required')">
+              Password must be at least 3 characters long
+            </mat-error>
+            <mat-error *ngIf="passwordFormControl.hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="m-16 ml-32 mr-32" fxLayout="row" fxLayoutGap="10px">
+      <button mat-raised-button (click)="signUp()" color="primary" class="white-fg">Sign Up</button>
+
+    </mat-card-actions>
+  </mat-card>
+</div>
