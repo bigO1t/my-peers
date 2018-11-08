@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { DataService } from 'src/@shared-module/services/data.service';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { IUser } from 'src/@shared-module/interfaces/user.interface';
 
 @Component({
   selector: 'app-notification',
@@ -7,7 +9,27 @@ import { MatDialogRef } from '@angular/material';
   styleUrls: ['./notification.component.scss']
 })
 export class NotificationComponent implements OnInit {
-  constructor(public dialogRef: MatDialogRef<NotificationComponent>) {}
+  title = 'Request Received';
+  constructor(
+    public dialogRef: MatDialogRef<NotificationComponent>,
+    private dataService: DataService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.data);
+  }
+
+  acceptRequest() {
+    this.data.user.paired_user = this.data.user.received.requester_email;
+    this.dataService.getData('users', this.data.user.paired_user).subscribe((ruser: IUser) => {
+      ruser.paired_user = this.data.user.key;
+      this.dataService.addUpdateData('users', ruser);
+    });
+  }
+
+  cancel() {
+    this.data.user.received.close = true;
+    this.dataService.addUpdateData('users', this.data.user);
+  }
 }

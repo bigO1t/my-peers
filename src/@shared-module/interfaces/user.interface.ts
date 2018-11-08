@@ -1,16 +1,6 @@
 import { IBase } from './base.interface';
-export interface IRating {
-  other_rating: number;
-  own_rating: number;
-  service_type: string;
-}
-
-export interface IRequest {
-  requester_first_name: string;
-  item_name: string;
-  item_description: string;
-  item_category: string;
-}
+import { IRequest } from './request.interface';
+import { IRating } from './rating.interface';
 
 export interface IUser extends IBase {
   first_name: string;

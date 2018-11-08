@@ -1,3 +1,31 @@
-<p>
-  notification works!
-</p>
+<div class="h-100-p" fxLayout="column">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <h1 mat-dialog-title>{{ title }}</h1>
+    <button mat-icon-button type="button" (click)="cancel()" class="dialog-close">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="h-100-p" fxLayout="column">
+    <div mat-dialog-content class="h-100-p">
+      <div fxLayout="column" fxLayoutWrap fxLayoutGap="24px" fxLayoutAlign="start">
+        <div><b>Name: </b>{{ data.received.requester_first_name }}</div>
+        <div><b>Item Name: </b>{{ data.received.item_name }}</div>
+        <div><b>Item Description: </b>{{ data.received.item_description }}</div>
+        <div><b>Item Category: </b>{{ data.received.item_category }}</div>
+      </div>
+    </div>
+    <mat-dialog-actions align="end">
+      <section>
+        <button mat-raised-button type="submit" color="primary" (click)="acceptRequest()">
+          <mat-icon class="white-fg s-16 mb-4">check</mat-icon>
+          Accept Request
+        </button>
+        <button mat-raised-button type="button" color="accent" (click)="cancel()">
+          <mat-icon class="white-fg s-16 mb-4">clear</mat-icon>
+          Cancel
+        </button>
+      </section>
+    </mat-dialog-actions>
+  </div>
+</div>

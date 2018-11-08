@@ -4,7 +4,8 @@ import { MatDialogRef } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { DataService } from 'src/@shared-module/services/data.service';
 import { MessageService } from 'src/@shared-module/services/message.service';
-import { IUser, IRequest } from 'src/@shared-module/interfaces/user.interface';
+import { IUser } from 'src/@shared-module/interfaces/user.interface';
+import { IRequest } from 'src/@shared-module/interfaces/request.interface';
 
 @Component({
   selector: 'app-manual-request',
@@ -31,7 +32,9 @@ export class ManualRequestComponent implements OnInit {
     private messageService: MessageService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.adaptToSmallScreen();
+  }
 
   sendRequest() {
     if (
@@ -46,23 +49,33 @@ export class ManualRequestComponent implements OnInit {
 
     const request: IRequest = {
       requester_first_name: user.first_name,
+      requester_email: user.key,
       item_name: this.itemNameFormControl.value,
       item_description: this.itemDescriptionControl.value,
-      item_category: this.categoryControl.value
+      item_category: this.categoryControl.value,
+      close: false
     };
 
-    this.userService.currentUser.requested = request;
+    user.requested = request;
 
     this.dataService.addUpdateData('users', user);
 
     this.dataService.getDataList('users').subscribe((users: IUser[]) => {
       if (users && users.length > 0) {
         users
-          .filter(x => !x.received || (!x.paired_user && x.key !== user.key))
+          .filter(
+            x =>
+              !x.received &&
+              !x.paired_user &&
+              x.key !== user.key &&
+              !user.requested &&
+              !x.received.close
+          )
           .forEach(x => {
             x.received = request;
             this.dataService.addUpdateData('users', x);
           });
+        this.dialogRef.close();
         return;
       }
       this.messageService.handleError<any>('Error getting users');

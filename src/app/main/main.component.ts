@@ -31,9 +31,10 @@ export class MainComponent implements OnInit {
     this.dataService.getData('users', this.user.key).subscribe((user: IUser) => {
       if (user.received && !user.paired_user) {
         const dialogRef = this.dialog.open(NotificationComponent, {
-          width: '20%',
-          height: '20%',
-          autoFocus: false
+          width: '30%',
+          height: '30%',
+          autoFocus: false,
+          data: { received: user.received, user: user }
         });
 
         dialogRef.afterClosed().subscribe(_ => {});

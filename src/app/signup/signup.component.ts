@@ -34,9 +34,6 @@ export class SignupComponent implements OnInit {
       first_name: this.firstNameFormControl.value,
       last_name: this.lastNameFormControl.value,
       password: this.passwordFormControl.value,
-      requested: {},
-      received: {},
-      paired_user: {},
       ratings: [
         {
           other_rating: 1,
