@@ -3,11 +3,8 @@ import { AppSharedModule } from './../@shared-module/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppComponent } from './app.component';
 import { UserService } from 'src/@shared-module/services/user.service';
-import { AuthService } from 'src/@shared-module/services/auth.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IdentityService } from 'src/@shared-module/services/identity.service';
 import { MessageService } from 'src/@shared-module/services/message.service';
 import { DataService } from 'src/@shared-module/services/data.service';
@@ -44,7 +41,7 @@ import { SignupModule } from './signup/signup.module';
     LoginModule,
     SignupModule
   ],
-  providers: [UserService, AuthService, IdentityService, MessageService, DataService],
+  providers: [UserService, IdentityService, MessageService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -6,22 +6,49 @@
       </div>
       <mat-card-title class="white-fg mt-8">Login</mat-card-title>
     </mat-card-header>
-    <mat-card-content class="m-32">
-      <form class="my-form" fxLayout="column">
+    <form>
+      <mat-card-content class="m-32" fxLayout="column">
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput placeholder="Email" name="email" />
+          <input
+            matInput
+            #emailInput
+            placeholder="Email"
+            name="email"
+            type="email"
+            [formControl]="emailControl"
+          />
+          <mat-error *ngIf="emailControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="emailControl.hasError('email')">
+            Please, enter a valid <strong>email</strong>
+          </mat-error>
         </mat-form-field>
-        <mat-form-field class="full-width">
+        <mat-form-field>
           <mat-label>Password</mat-label>
-          <input matInput placeholder="Password" name="password" type="password" />
+          <input
+            matInput
+            placeholder="Password"
+            name="password"
+            type="password"
+            [formControl]="passwordControl"
+          />
+          <mat-error *ngIf="passwordControl.hasError('required')">
+            Password is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="passwordControl.hasError('minlength')">
+            Password needs to be more than <strong>2 characters</strong>
+          </mat-error>
         </mat-form-field>
-      </form>
-    </mat-card-content>
-    <mat-card-actions class="m-16 ml-32 mr-32" fxLayout="row" fxLayoutGap="10px">
-      <button mat-raised-button (click)="login()" color="primary" class="white-fg">Login</button>
-      <button mat-button (click)="signUp()" color="warn"><i>Sign Up</i></button>
-    </mat-card-actions>
+      </mat-card-content>
+      <mat-card-actions class="m-16 ml-32 mr-32" fxLayout="row" fxLayoutGap="10px">
+        <button mat-raised-button type="submit" (click)="login()" color="primary" class="white-fg">
+          Login
+        </button>
+        <button mat-button type="button" (click)="signUp()" color="warn"><i>Sign Up</i></button>
+      </mat-card-actions>
+    </form>
   </mat-card>
 </div>
 
