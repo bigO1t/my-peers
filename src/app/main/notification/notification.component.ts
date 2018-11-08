@@ -33,9 +33,7 @@ export class NotificationComponent implements OnInit {
           users
             .filter(x => x.received)
             .forEach(x => {
-              this.dataService.deleteField('received', x.key, 'users');
-              //x.received = null;
-              x.close_request = false;
+              x.received = null;
               this.dataService.addUpdateData('users', x);
             });
           this.dialogRef.close();
