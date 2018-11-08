@@ -15,6 +15,7 @@
             placeholder="Email"
             name="email"
             type="email"
+            [formControl]="emailControl"
             [(ngModel)]="loginUser.email"
           />
           <button
@@ -42,6 +43,7 @@
             placeholder="Password"
             name="password"
             type="password"
+            [formControl]="passwordControl"
             [(ngModel)]="loginUser.password"
           />
           <button
