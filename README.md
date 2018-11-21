@@ -1,6 +1,6 @@
 # my-peers
 
-Team of 4
+Team of 5
 
 ## Status
 
